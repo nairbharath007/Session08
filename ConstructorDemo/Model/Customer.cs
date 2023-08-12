@@ -9,50 +9,47 @@ namespace ConstructorDemo.Model
 {
     internal class Customer
     {
-        private readonly int _id;
-        private string _name;
-        private readonly string _email;
-        public int Id
+        public int Id { get; set; }
+
+        public string Name { get; set; }
+
+        public string Email { get; set; }
+
+        //static variable
+        private static int _countCustomers = 0;
+
+        //static properties
+        public static int CountCustomers
         {
-            get { return _id;  }
+            get { return _countCustomers; }
         }
 
-        public string Name
+        //static constructor
+        static Customer()
         {
-            get { return _name; }
-            set { _name = value; }
+            Console.WriteLine("Static Constructor");
         }
 
-        public string Email
+        public Customer()
         {
-            get { return _email; }
-           
+            Console.WriteLine("Default Constructor");
+            _countCustomers++;
         }
 
-        public Customer() //default
+        public Customer(int id, string name, string email) : this()
         {
-            /*_id = 101;
-            _name = "InitialName";*/
-
-            Console.WriteLine("===========Object created===========");
-        }
-        public Customer(int id, string name) : this()
-        {
-            _id = id;
-            _name = name;
-            
-        }
-
-        public Customer(int id, string name, string email) : this(id, name)
-        {
-            /*_id = id;
-            _name = name;*/
-            _email = "name5@gmail.com";
+            Id = id;
+            Name = name;
+            Email = email;
         }
 
         public string ShowCustomerDetails()
         {
             return $"Id: {Id}\nName: {Name}\nEmail : {Email}";
         }   
+
+        //static method
+        public static int Count()
+        { return _countCustomers; }
     }
 }
